@@ -48,7 +48,15 @@ require_internet() {
 
 apt_refresh() {
   info "Refreshing apt indexes"
-  sudo apt-get update -y
+  # `apt-get update` exits non-zero if ANY repo fails (e.g. user has a 3rd-party
+  # repo with an expired GPG key from a previously installed app like Edge or
+  # Chrome). Other repos still refresh fine, so we don't want this to abort
+  # the whole installer. Warn and continue; if a required Ubuntu package is
+  # truly unavailable, the later apt_install will surface a clear error.
+  if ! sudo apt-get update -y; then
+    warn "apt-get update reported errors (likely a 3rd-party repo with a stale GPG key)."
+    warn "Continuing — Ubuntu's own repos are usable."
+  fi
 }
 
 install_base_tools() {
