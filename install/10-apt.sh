@@ -47,21 +47,23 @@ DESKTOP_PKGS=(
   fcitx5-frontend-qt6
 )
 
-# --- Login manager ---
-# SDDM's default greeter is X11. On a minimal Ubuntu cloud image, Xorg isn't
-# installed, so the greeter fails with "Failed to start display server".
-# We install just the X server core (~4MB) so the greeter works; Hyprland
-# itself still runs as a Wayland session.
+# --- Login manager support ---
+# We deliberately DO NOT install SDDM or swap your display manager.
+# Whatever you log in with today (GDM on a standard Ubuntu install) will
+# discover the Hyprland Wayland session entry from 40-login.sh and let you
+# pick "Hyprland" at the login screen.
+#
+# Rationale: on real Ubuntu hardware (especially newer Intel iGPUs using the
+# `xe` kernel driver), SDDM's X11 greeter often fails to initialize, leaving
+# the system hanging at the Plymouth boot splash. GDM works out of the box,
+# supports launching Wayland sessions, and is already installed — there's no
+# user-visible benefit to switching for a Hyprland-focused setup.
 #
 # uwsm = Universal Wayland Session Manager. Omarchy's autostart wraps every
 # entry with `uwsm-app`; without uwsm installed, none of them launch
 # (no waybar, no wallpaper, no notifications).
 LOGIN_PKGS=(
-  sddm
   uwsm
-  xserver-xorg-core
-  xinit
-  xauth
 )
 
 # --- Terminals ---

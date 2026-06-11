@@ -15,14 +15,15 @@ upstream configuration files verbatim.
    - Verifies preconditions (Ubuntu version, sudo, non-root user).
    - Installs everything available from `apt` (Hyprland, Waybar, Mako, SDDM,
      terminals, fonts, portals, etc.).
-   - Builds the few tools not in Ubuntu repos (Walker launcher).
+   - Builds the few tools not in Ubuntu repos (Walker launcher, elephant).
    - Clones `basecamp/omarchy` to `~/.local/share/omarchy/` for its
      configs, themes, defaults, and `bin/` scripts.
    - Copies Omarchy's `config/` to `~/.config/` so Hyprland sources the same
      files it does on Arch.
-   - Registers a Hyprland Wayland session and enables SDDM.
-3. You log out of GNOME, pick the **Hyprland** session at the SDDM login screen,
-   and log back in.
+   - Registers a Hyprland Wayland session entry (your existing display
+     manager — GDM on a standard Ubuntu install — picks it up automatically).
+3. You log out of GNOME, click the **session selector** at the GDM login
+   screen, pick **Hyprland**, and log back in.
 
 ## Usage
 
