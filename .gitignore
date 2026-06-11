@@ -1,0 +1,4 @@
+install.log
+*.swp
+*.swo
+.DS_Store
